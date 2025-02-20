@@ -34,18 +34,18 @@ int main()
 
 
         BeginDrawing();
-        ClearBackground(Color(255,255,255));
+        ClearBackground(RAYWHITE);
 
 
         drawPlayer(player);
 
         if (IsKeyPressed(KEY_SPACE)) playRandomSound(sounds);
         drawPipes(pipes);
-
-       
+        std::string scoreString = std::to_string(player.score);
+        DrawText(scoreString.c_str(), GetScreenWidth()/2, 200, 70, DARKGRAY);
         EndDrawing();
 
-
+        handleScoring(player,pipes);
 
         handlePipes(pipes);
 

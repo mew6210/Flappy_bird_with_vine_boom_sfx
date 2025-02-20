@@ -16,7 +16,7 @@ public:
 	int positionX = GetScreenWidth()/2;
 	int positionY = GetScreenHeight()/2;
 	Color playerColor = Color(RED);
-
+	int score = 0;
 
 
 
@@ -29,6 +29,7 @@ public:
 	int whereHole = GetScreenHeight()/2;
 	int posX = GetScreenWidth() + width;
 	int howBigHole = 400;
+	bool addedToScore = false;
 
 	Pipe() {
 		
@@ -62,3 +63,5 @@ void handlePipes(std::deque<Pipe>& pipes);
 
 void movePipes(std::deque<Pipe>& pipes, int pipeSpeed);
 void handlePlayerMovement(Player& player);
+
+void handleScoring(Player& player,std::deque<Pipe>& pipes);

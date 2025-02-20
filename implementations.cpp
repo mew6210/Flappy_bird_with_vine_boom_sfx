@@ -5,7 +5,10 @@
 
 void drawPlayer(Player& player) {
 
-	DrawRectangle(player.positionX, player.positionY, 50, 50, player.playerColor);
+    int screenWidth = GetScreenWidth();
+    int playerSize = screenWidth * 0.03;
+
+	DrawRectangle(player.positionX, player.positionY, playerSize, playerSize, player.playerColor);
 
 }
 
@@ -166,6 +169,17 @@ void handlePlayerMovement(Player& player) {
 
     if (IsKeyPressed(KEY_W)) {
         velocityY = jumpForce;
+    }
+
+}
+
+void handleScoring(Player& player, std::deque<Pipe>& pipes) {
+
+    for (Pipe& pipe : pipes) {
+        if (pipe.posX < GetScreenWidth()/2 && pipe.addedToScore == false) {
+            player.score += 1;
+            pipe.addedToScore = true;
+        }
     }
 
 }

@@ -22,7 +22,7 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(raylib)
 
 # Add source to this project's executable.
-add_executable (Flappy_bird_with_vine_boom_sfx "main.cpp" "stuff.h")
+add_executable (Flappy_bird_with_vine_boom_sfx "main.cpp" "stuff.h" "implementations.cpp")
 target_link_libraries(Flappy_bird_with_vine_boom_sfx PRIVATE raylib)
 target_include_directories(Flappy_bird_with_vine_boom_sfx PRIVATE ${raylib_SOURCE_DIR}/src)
 

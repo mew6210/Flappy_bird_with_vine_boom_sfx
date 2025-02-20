@@ -1,26 +1,38 @@
 ﻿#include "stuff.h"
-#include "raylib.h"
+
 
 int main()
 {
-
-    const int screenWidth = 800;
-    const int screenHeight = 450;
-
+    
+    const int screenWidth = GetScreenWidth();
+    const int screenHeight = GetScreenHeight();
     InitWindow(screenWidth, screenHeight, "Totally normal flappybird");
+    ToggleBorderlessWindowed();
 
+    Player player;
+    InitAudioDevice();
+    std::vector<Sound> sounds;
+    //std::vector<Pipe> pipes;
+
+    loadSoundsFromDirectory(sounds);
+
+
+    SetTargetFPS(60);
 
     while (!WindowShouldClose())
     {
-       
-        
         BeginDrawing();
 
-        ClearBackground(Color(0,0,0));
+        drawPlayer(player);
+
+        if (IsKeyPressed(KEY_SPACE)) playRandomSound(sounds);
+
 
        
         EndDrawing();
     }
 
-
+    CloseAudioDevice();
+    unloadAllSounds(sounds);
+    CloseWindow();
 }

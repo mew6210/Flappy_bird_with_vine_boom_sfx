@@ -11,8 +11,22 @@ endif()
 
 project ("Flappy_bird_with_vine_boom_sfx")
 
+include(FetchContent)
+
+FetchContent_Declare(
+  raylib
+  GIT_REPOSITORY https://github.com/raysan5/raylib.git
+  GIT_TAG        32fcfd354908614f2aaa9d37016b35e9fbfcbe68 
+)
+
+FetchContent_MakeAvailable(raylib)
+
 # Add source to this project's executable.
-add_executable (Flappy_bird_with_vine_boom_sfx "Flappy_bird_with_vine_boom_sfx.cpp" "Flappy_bird_with_vine_boom_sfx.h")
+add_executable (Flappy_bird_with_vine_boom_sfx "main.cpp" "stuff.h")
+target_link_libraries(Flappy_bird_with_vine_boom_sfx PRIVATE raylib)
+target_include_directories(Flappy_bird_with_vine_boom_sfx PRIVATE ${raylib_SOURCE_DIR}/src)
+
+
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET Flappy_bird_with_vine_boom_sfx PROPERTY CXX_STANDARD 20)

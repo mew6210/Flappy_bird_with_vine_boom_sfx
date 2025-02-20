@@ -52,3 +52,120 @@ void playRandomSound(std::vector<Sound>& sounds) {
 
     PlaySound(sounds[dist(gen)]);
 }
+
+
+
+
+
+
+void drawPipe(Pipe& pipe) {
+
+
+    DrawRectangle(pipe.posX, 0, pipe.width, pipe.whereHole, GREEN);
+
+    DrawRectangle(pipe.posX, pipe.whereHole+pipe.howBigHole, pipe.width, GetScreenHeight(), GREEN);
+
+}
+
+
+void drawPipes(std::deque<Pipe>& pipes) {
+
+    for (Pipe& pipe : pipes) {
+        drawPipe(pipe);
+    }
+
+
+}
+
+
+
+bool shouldAddPipe(std::deque<Pipe>& pipes) {
+
+    int screenWidth = GetScreenWidth();
+
+    if (pipes[0].posX < screenWidth-screenWidth*0.3) {
+        return true;
+    }
+    else return false;
+
+    
+
+
+
+}
+void addPipe(std::deque<Pipe>& pipes) {
+
+    pipes.push_front(Pipe());
+
+}
+
+
+
+bool shouldDeletePipe(std::deque<Pipe>& pipes) {
+    int length = pipes.size() - 1;
+    if (pipes[length].posX < 0 - pipes[length].width) return true;
+    else return false;
+
+
+}
+
+
+
+void deletePipe(std::deque<Pipe>& pipes) {
+
+    pipes.pop_back();
+
+
+}
+
+
+void handlePipes(std::deque<Pipe>& pipes) {
+
+    
+    if (shouldAddPipe(pipes)) {
+        addPipe(pipes);
+    }
+
+
+
+
+    if (shouldDeletePipe(pipes)) {
+        deletePipe(pipes);
+    }
+    
+    
+}
+
+
+
+void movePipes(std::deque<Pipe>& pipes,int pipeSpeed) {
+    float deltaTime = GetFrameTime();
+    for (Pipe& pipe : pipes) {
+        pipe.posX -= pipeSpeed * deltaTime;
+
+    }
+
+
+}
+
+void handlePlayerMovement(Player& player) {
+
+    float deltaTime = GetFrameTime(); 
+    static float velocityY = 0.0f;
+    static float gravity = 800.0f;     // Gravity force
+    static float jumpForce = -350.0f;  // Upward force when jumping
+
+
+
+
+    velocityY += gravity * deltaTime;
+
+
+
+    player.positionY += velocityY * deltaTime;
+
+    if (IsKeyPressed(KEY_W)) {
+        velocityY = jumpForce;
+    }
+
+}

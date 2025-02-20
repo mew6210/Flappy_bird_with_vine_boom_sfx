@@ -12,24 +12,46 @@ int main()
     Player player;
     InitAudioDevice();
     std::vector<Sound> sounds;
-    //std::vector<Pipe> pipes;
+    std::deque<Pipe> pipes;
 
     loadSoundsFromDirectory(sounds);
+    Pipe pipe1;
 
+    pipes.push_back(pipe1);
 
     SetTargetFPS(60);
 
+
+
+
+
+    int pipeSpeed = 200;
+
+
     while (!WindowShouldClose())
     {
+        movePipes(pipes, pipeSpeed);
+
+
         BeginDrawing();
+        ClearBackground(Color(255,255,255));
+
 
         drawPlayer(player);
 
         if (IsKeyPressed(KEY_SPACE)) playRandomSound(sounds);
-
+        drawPipes(pipes);
 
        
         EndDrawing();
+
+
+
+        handlePipes(pipes);
+
+        handlePlayerMovement(player);
+
+
     }
 
     CloseAudioDevice();

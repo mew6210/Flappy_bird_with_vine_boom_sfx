@@ -26,30 +26,49 @@ int main()
 
 
     int pipeSpeed = 200;
-
+    bool shouldPlaySound = true;
 
     while (!WindowShouldClose())
     {
-        movePipes(pipes, pipeSpeed);
+        if (player.shouldGameStillGo) {
+            movePipes(pipes, pipeSpeed);
+
+            BeginDrawing();
+            ClearBackground(RAYWHITE);
 
 
-        BeginDrawing();
-        ClearBackground(RAYWHITE);
+            drawPlayer(player);
+
+            if (IsKeyPressed(KEY_SPACE)) playRandomSound(sounds);
+            drawPipes(pipes);
+            std::string scoreString = std::to_string(player.score);
+            DrawText(scoreString.c_str(), GetScreenWidth() / 2, 200, 70, DARKGRAY);
+            EndDrawing();
+
+            handleScoring(player, pipes);
+
+            handlePipes(pipes);
+
+            handlePlayerMovement(player);
+
+            handleCollisions(player, pipes);
+        }
+        else {
+            BeginDrawing();
+
+            if (shouldPlaySound) {
+                playRandomSound(sounds);
+                shouldPlaySound = false;
+            }
+            std::string gameOverText = "Game over\nYour score: " + std::to_string(player.score);
+            DrawText(gameOverText.c_str(), GetScreenWidth() / 2, GetScreenHeight()/2, 70, DARKGRAY);
 
 
-        drawPlayer(player);
 
-        if (IsKeyPressed(KEY_SPACE)) playRandomSound(sounds);
-        drawPipes(pipes);
-        std::string scoreString = std::to_string(player.score);
-        DrawText(scoreString.c_str(), GetScreenWidth()/2, 200, 70, DARKGRAY);
-        EndDrawing();
+            EndDrawing();
 
-        handleScoring(player,pipes);
+        }
 
-        handlePipes(pipes);
-
-        handlePlayerMovement(player);
 
 
     }

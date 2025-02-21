@@ -15,9 +15,10 @@ class Player {
 public:
 	int positionX = GetScreenWidth()/2;
 	int positionY = GetScreenHeight()/2;
+	int size=  GetScreenWidth() *0.03;
 	Color playerColor = Color(RED);
 	int score = 0;
-
+	bool shouldGameStillGo = true;
 
 
 };
@@ -65,3 +66,5 @@ void movePipes(std::deque<Pipe>& pipes, int pipeSpeed);
 void handlePlayerMovement(Player& player);
 
 void handleScoring(Player& player,std::deque<Pipe>& pipes);
+
+void handleCollisions(Player& player, std::deque<Pipe>& pipes);

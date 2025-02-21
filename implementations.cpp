@@ -5,10 +5,9 @@
 
 void drawPlayer(Player& player) {
 
-    int screenWidth = GetScreenWidth();
-    int playerSize = screenWidth * 0.03;
 
-	DrawRectangle(player.positionX, player.positionY, playerSize, playerSize, player.playerColor);
+
+	DrawRectangle(player.positionX, player.positionY, player.size, player.size, player.playerColor);
 
 }
 
@@ -183,3 +182,65 @@ void handleScoring(Player& player, std::deque<Pipe>& pipes) {
     }
 
 }
+
+
+void handleCollisions(Player& player, std::deque<Pipe>& pipes) {
+
+    for (Pipe& pipe : pipes) {
+        //upper pipe
+        if (
+            player.positionX < pipe.posX + pipe.width &&
+            player.positionX + player.size > pipe.posX &&
+            player.positionY < 0 + pipe.whereHole &&
+            player.positionY + player.size > 0
+
+            ) {
+            player.shouldGameStillGo = false;
+        }
+        
+
+
+        /*
+        
+        rect1.x < rect2.x + rect2.w &&
+        rect1.x + rect1.w > rect2.x &&
+        rect1.y < rect2.y + rect2.h &&
+        rect1.y + rect1.h > rect2.y
+        
+        
+        
+        */
+
+        //lower pipe
+
+        if (
+
+            player.positionX < pipe.posX + pipe.width &&
+            player.positionX + player.size > pipe.posX &&
+            player.positionY < pipe.whereHole + pipe.howBigHole + GetScreenHeight() &&
+            player.positionY + player.size >pipe.whereHole + pipe.howBigHole
+
+
+
+            ) {
+
+
+            player.shouldGameStillGo = false;
+
+
+        }
+    }
+
+
+
+
+
+
+}
+
+
+
+
+
+
+

@@ -28,6 +28,21 @@ target_include_directories(Flappy_bird_with_vine_boom_sfx PRIVATE ${raylib_SOURC
 
 
 
+set(AUDIO_SOURCE ${CMAKE_SOURCE_DIR}/audio/vine-boom-sound-effect.wav)
+set(AUDIO_DESTINATION ${CMAKE_BINARY_DIR}/audio/vine-boom-sound-effect.wav)
+
+
+add_custom_command(
+    TARGET ${PROJECT_NAME} POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+    ${AUDIO_SOURCE} ${AUDIO_DESTINATION}
+    COMMENT "Copying audio to the audio directory"
+)
+
+
+
+
+
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET Flappy_bird_with_vine_boom_sfx PROPERTY CXX_STANDARD 20)
 endif()

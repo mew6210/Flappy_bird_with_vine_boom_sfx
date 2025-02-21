@@ -166,7 +166,7 @@ void handlePlayerMovement(Player& player) {
 
     player.positionY += velocityY * deltaTime;
 
-    if (IsKeyPressed(KEY_W)) {
+    if (IsKeyPressed(KEY_SPACE)) {
         velocityY = jumpForce;
     }
 

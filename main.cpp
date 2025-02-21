@@ -39,7 +39,6 @@ int main()
 
             drawPlayer(player);
 
-            if (IsKeyPressed(KEY_SPACE)) playRandomSound(sounds);
             drawPipes(pipes);
             std::string scoreString = std::to_string(player.score);
             DrawText(scoreString.c_str(), GetScreenWidth() / 2, 200, 70, DARKGRAY);
@@ -60,7 +59,7 @@ int main()
                 playRandomSound(sounds);
                 shouldPlaySound = false;
             }
-            std::string gameOverText = "Game over\nYour score: " + std::to_string(player.score);
+            std::string gameOverText = "You dead";
             DrawText(gameOverText.c_str(), GetScreenWidth() / 2, GetScreenHeight()/2, 70, DARKGRAY);
 
 
